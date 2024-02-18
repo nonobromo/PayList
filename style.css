@@ -85,9 +85,13 @@ h3 {
 
 @media screen and (max-width:1300px) {
     body {
-        height: 800px;
+        height: 1300px;
         position: absolute;
         inset: 0;
         margin: auto;
+    }
+
+    .container {
+        margin-top: 40px;
     }
 }
