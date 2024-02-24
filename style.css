@@ -12,6 +12,7 @@ body {
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+    height: 1000px;
 }
 
 .container {
@@ -62,13 +63,19 @@ h3 {
 }
 
 .cell-one input {
-    width: 200px;
+    width: 250px;
     height: 40px;
     font-size: 2rem;
 }
 
-.cell-one button {
-    width: 200px;
+.cell-two {
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cell-two button {
+    width: 100px;
     height: 30px;
     font-size: 1.5rem;
 }
@@ -88,19 +95,25 @@ h3 {
     justify-content: space-between;
 }
 
-li {
-    cursor: pointer;
+.recipt h3 {
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
-@media screen and (max-width:1300px) {
-    body {
-        height: 1300px;
-        position: absolute;
-        inset: 0;
-        margin: auto;
-    }
+li {
+    width: 200px;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+@media screen and (min-width: 280px) and (max-width:1400px) {
 
     .container {
-        margin-top: 40px;
+        margin: auto;
+        inset: 0;
+        position: absolute;
     }
+
 }

@@ -1,48 +1,70 @@
-const input1 = document.getElementById("input1");
-const input2 = document.getElementById("input2");
+const pays = [];
+let tip = 0;
+
+let total = 0;
+
+
+const input1 = document.querySelector("#input1");
+const input2 = document.querySelector("#input2");
 const btn1 = document.getElementById("btn1");
-const list = document.getElementById("list");
+const btn2 = document.getElementById("btn2");
 
-let total = +0;
-let tip = +0;
-
-document.getElementById("totalCost").innerHTML = `Total is ${total} ₪`;
-document.getElementById("tip").innerHTML = `Tip is ${tip} ₪`;
-
-btn1.addEventListener("click", function () {
-    //Captrues The Name of the Guest And how much he is going to pay
+btn1.addEventListener("click", () => {
     let name = input1.value;
-    let ammount = +input2.value;
+    let ammount = input2.value;
 
-    //Create an Li element inside the ordered List
+    const list = document.querySelector("#list");
+
+    const li = document.createElement("li");
+
+    list.appendChild(li);
 
 
-    if (name === "" || ammount === "") {
-        document.getElementsByName("name")[0].placeholder = "Please Enter a Name";
-        document.getElementsByName("guest")[0].placeholder = "Please Enter a Number";
-        document.getElementById("input1").style.fontSize = "1rem";
-        document.getElementById("input2").style.fontSize = "1rem";
-    } else {
-        const li = document.createElement("li");
-        li.innerHTML = `${name} will pay ${ammount} ₪`;
-        document.querySelector("ol").appendChild(li);
+    const divAdd = document.createElement("div");
+    divAdd.innerHTML = `${name} is paying ${ammount} ₪`;
+    // divAdd.contentEditable = true;
+    li.appendChild(divAdd);
 
-        li.addEventListener("click", ev => ev.target.remove());
-        //Adds Guest Ammount Value
-        total += ammount;
-        document.getElementById("totalCost").innerHTML = `Total is ${total} ₪`;
 
-        //Calculates How Much Tip Is Needed
+    const btnRemove = document.createElement("btn");
+    btnRemove.innerHTML = "X";
+    li.appendChild(btnRemove);
+
+    btnRemove.addEventListener("click", function () {
+        let lastLi = list.lastElementChild
+        list.removeChild(lastLi);
+        let lastOne = pays.pop();
+        total -= lastOne;
+        document.querySelector("#totalCost").innerHTML = `Total is ${total}`;
+
         tip = total / 100 * 10;
-        document.getElementById("tip").innerHTML = `Tip is ${tip} ₪`;
+        document.querySelector("#tip").innerHTML = `tip is ${tip}`;
 
-        document.getElementsByName("name")[0].placeholder = "";
-        document.getElementsByName("guest")[0].placeholder = "";
-    }
-
-    //Clears input inner value
-    input1.value = "";
-    input2.value = "";
+        if (total === 0 && tip === 0) {
+            document.querySelector("#totalCost").innerHTML = "";
+            document.querySelector("#tip").innerHTML = "";
+        }
+    })
+    addPay();
 });
 
+function addPay() {
+    pays.push(+input2.value);
+    input1.value = "";
+    input2.value = "";
+    console.log(pays);
+}
 
+
+btn2.addEventListener("click", () => {
+    calc();
+});
+
+function calc() {
+    for (let i = 0; i < pays.length; i++) {
+        total += pays[i];
+    }
+    tip = total / 100 * 10;
+    document.querySelector("#totalCost").innerHTML = `Total is ${total}`;
+    document.querySelector("#tip").innerHTML = `tip is ${tip}`;
+}
