@@ -3,6 +3,7 @@ let tip = 0;
 
 let total = 0;
 
+let score = 0;
 
 const input1 = document.querySelector("#input1");
 const input2 = document.querySelector("#input2");
@@ -16,6 +17,8 @@ btn1.addEventListener("click", () => {
     const list = document.querySelector("#list");
 
     const li = document.createElement("li");
+
+    li.setAttribute('i', pays.length);
 
     list.appendChild(li);
 
@@ -33,7 +36,8 @@ btn1.addEventListener("click", () => {
     btnRemove.addEventListener("click", function () {
         let lastLi = list.lastElementChild
         list.removeChild(lastLi);
-        let lastOne = pays.pop();
+        const i = li.getAttribute('i');
+        let lastOne = pays.splice(i, 1);
         total -= lastOne;
         document.querySelector("#totalCost").innerHTML = `Total is ${total}`;
 
@@ -67,4 +71,5 @@ function calc() {
     tip = total / 100 * 10;
     document.querySelector("#totalCost").innerHTML = `Total is ${total}`;
     document.querySelector("#tip").innerHTML = `tip is ${tip}`;
+    ammount = 0;
 }
